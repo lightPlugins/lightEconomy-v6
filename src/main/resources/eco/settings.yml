@@ -20,5 +20,9 @@ default-currency:
   # - 999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,99.
   # This is the maximum number you can use.
   max-pocket-balance: 999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,99
+  # the players who wohnt be shown in the top command and placeholders
+  # must be a uuid from the player -> https://mcuuid.net/
+  exclude-from-top-list:
+    - '069a79f4-44e9-4726-a5be-fca90e38aaf5'  # Notch
 main-settings:
   date-format: 'dd:MM:yyyy'

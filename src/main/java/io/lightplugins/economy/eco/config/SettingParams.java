@@ -5,10 +5,11 @@ import io.lightplugins.economy.util.NumberFormatter;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class SettingParams {
 
-    private final LightEco lightEco;
+    private LightEco lightEco;
     private final String defaultCurrency = "default-currency.";
 
     public SettingParams(LightEco lightEco) {
@@ -20,6 +21,7 @@ public class SettingParams {
     public String getModuleLanguage() {
         return lightEco.getSettings().getConfig().getString("module-language");
     }
+
 
 
 
@@ -58,6 +60,9 @@ public class SettingParams {
         }
         public double maxPocketBalance() {
             return lightEco.getSettings().getConfig().getDouble(defaultCurrency + "max-pocket-balance");
+        }
+        public List<String> getExcludeTop() {
+            return lightEco.getSettings().getConfig().getStringList("exclude-from-top-list");
         }
     }
 }

@@ -22,6 +22,10 @@
                   <pattern>com.zaxxer.hikari</pattern>
                   <shadedPattern>io.lightplugins.economy.util.database.hikari</shadedPattern>
                 </relocation>
+                <relocation>
+                  <pattern>com.github.stefvanschie.inventoryframework</pattern>
+                  <shadedPattern>ui.lightplugins.economny.util.inventory</shadedPattern>
+                </relocation>
               </relocations>
               <outputFile>./lighteco-dev-server/plugins/${project.artifactId}-${project.version}-SNAPSHOT.jar</outputFile>
               <filters>
@@ -72,11 +76,6 @@
     <repository>
       <id>placeholderapi</id>
       <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
-    </repository>
-    <repository>
-      <id>citizens-repo</id>
-      <name>Citizens Repository</name>
-      <url>https://maven.citizensnpcs.co/repo</url>
     </repository>
     <repository>
       <id>glaremasters repo</id>

@@ -47,12 +47,6 @@
         </repository>
 
         <repository>
-            <id>citizens-repo</id>
-            <name>Citizens Repository</name>
-            <url>https://maven.citizensnpcs.co/repo</url>
-        </repository>
-
-        <repository>
             <id>glaremasters repo</id>
             <url>https://repo.glaremasters.me/repository/towny/</url>
         </repository>
@@ -102,6 +96,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <artifactId>IF</artifactId>
+            <version>0.10.13</version>
+        </dependency>
+
+        <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.11.5</version>
@@ -143,6 +143,7 @@
             <version>0.100.1.0</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -170,6 +171,10 @@
                                 <relocation>
                                     <pattern>com.zaxxer.hikari</pattern>
                                     <shadedPattern>io.lightplugins.economy.util.database.hikari</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.github.stefvanschie.inventoryframework</pattern>
+                                    <shadedPattern>ui.lightplugins.economny.util.inventory</shadedPattern>
                                 </relocation>
                             </relocations>
                             <outputFile>./lighteco-dev-server/plugins/${project.artifactId}-${project.version}-SNAPSHOT.jar</outputFile>

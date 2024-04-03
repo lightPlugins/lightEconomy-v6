@@ -107,6 +107,10 @@ public class LightEco implements LightModule {
         selectLanguage();
         LightEconomy.getDebugPrinting().print(moduleName + "/language/" + settingParams.getModuleLanguage() + ".yml");
         getLanguage().reloadConfig(moduleName + "/language/" + settingParams.getModuleLanguage() + ".yml");
+        
+        messageParams = new MessageParams(language);
+        settingParams = new SettingParams(this);
+
     }
 
     @Override

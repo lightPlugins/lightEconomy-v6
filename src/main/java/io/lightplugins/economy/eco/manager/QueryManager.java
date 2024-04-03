@@ -12,6 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.TreeMap;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -73,6 +76,50 @@ public class QueryManager {
             e.printStackTrace();
             future.completeExceptionally(e);
             throw new RuntimeException("[Light] Could not execute SQL statement", e);
+        }
+
+        return future;
+    }
+
+    public CompletableFuture<TreeMap<UUID, BigDecimal>> getTopList() {
+        CompletableFuture<TreeMap<UUID, BigDecimal>> future = new CompletableFuture<>();
+
+        List<UUID> excluded = Arrays.asList(UUID.fromString("your_uuid1"), UUID.fromString("your_uuid2"), UUID.fromString("your_uuid3"));
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT uuid, balance FROM ").append(tableName); // tableName einfügen
+
+        if (!excluded.isEmpty()) {
+            queryBuilder.append(" WHERE uuid NOT IN (");
+            for (int i = 0; i < excluded.size(); i++) {
+                if (i > 0) {
+                    queryBuilder.append(", ");
+                }
+                queryBuilder.append("'").append(excluded.get(i)).append("'");
+            }
+            queryBuilder.append(")");
+        }
+
+        queryBuilder.append(" ORDER BY balance DESC LIMIT 10;");
+
+        String sql = queryBuilder.toString(); // Abfrage als String speichern
+
+        try (Connection c = database.getConnection();
+             PreparedStatement statement = c.prepareStatement(sql); // PreparedStatement mit der Abfrage erstellen
+             ResultSet set = statement.executeQuery()) {
+
+            TreeMap<UUID, BigDecimal> resultMap = new TreeMap<>();
+            while (set.next()) {
+                double balance = set.getDouble("balance");
+                UUID uuid = UUID.fromString(set.getString("uuid"));
+                resultMap.put(uuid, BigDecimal.valueOf(balance));
+            }
+
+            future.complete(resultMap);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            future.completeExceptionally(e);
         }
 
         return future;

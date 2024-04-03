@@ -1,0 +1,33 @@
+gui-title: 'Top Balances'
+rows: 6
+contents:
+    - content: top_balance_1
+      material:
+        data: 'player_head'
+        model-data: 1234
+        head-data: '#player#'
+        display-name: '<gold>#1 <gray>#playername#'
+        lore:
+          - '<gray>This is a lore #amount#'
+        item-pos-x: 4
+        item-pos-y: 1
+    - content: top_balance_2
+      material:
+        data: 'player_head'
+        model-data: 1234
+        head-data: '#player#'
+        display-name: '<yellow>#2 <gray>#playername#'
+        lore:
+          - '<gray>This is a lore #amount#'
+        item-pos-x: 3
+        item-pos-y: 2
+    - content: top_balance_3
+      material:
+        data: 'player_head'
+        model-data: 1234
+        head-data: '#player#'
+        display-name: '<white>#3 <gray>#playername#'
+        lore:
+          - '<gray>This is a lore #amount#'
+        item-pos-x: 3
+        item-pos-y: 2

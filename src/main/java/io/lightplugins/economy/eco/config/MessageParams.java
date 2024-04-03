@@ -5,7 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class MessageParams {
 
-    private final FileConfiguration config;
+    private FileConfiguration config;
 
     public MessageParams(FileManager selectedLanguage) {
         this.config = selectedLanguage.getConfig();
