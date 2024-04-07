@@ -1,29 +1,76 @@
 package io.lightplugins.economy.util.content.watcher;
 
+import io.lightplugins.economy.LightEconomy;
 import io.lightplugins.economy.util.NumberFormatter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiItem {
+public class GuiItemContent {
 
     private Material material;
-    private String displayName;
-    private int amount;
+    private final String displayName;
+    private final int amount;
     private int modelData;
     private boolean glow = false;
     private boolean hideEnchants = false;
     private boolean hideFlags = false;
-    private int posX;
-    private int posY;
-    private List<String> lore = new ArrayList<>();
+    private final int posX;
+    private final int posY;
+    private final List<String> lore = new ArrayList<>();
+
+    public int getPosX() {
+        return this.posX;
+    }
+
+    public int getPosY() {
+        return this.posY;
+    }
+
+    public ItemStack getGuiItem() {
+        ItemStack itemStack = new ItemStack(this.material, this.amount);
+
+        if(itemStack.getItemMeta() == null) {
+            itemStack = new ItemStack(Material.STONE, 1);
+        }
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if(itemMeta == null) {
+            throw new RuntimeException("Provided GuiITEM has no ItemMeta! Check your inventory config.");
+        }
+
+        itemMeta.setDisplayName(this.displayName);
+        itemMeta.setLore(this.lore);
+        itemMeta.setCustomModelData(this.modelData);
+
+        itemMeta.setCustomModelData(this.modelData);
+        if(this.glow) {
+            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        }
+
+        if(this.hideEnchants) {
+            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        if(this.hideFlags) {
+            itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        }
+
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
 
 
-    public GuiItem(ConfigurationSection section) {
+    public GuiItemContent(ConfigurationSection section) {
 
         this.posX = section.getInt("args.item-pos-x");
         this.posY = section.getInt("args.item-pos-y");
@@ -34,6 +81,11 @@ public class GuiItem {
             TextComponent textComponent = Component.text(lore);
             this.lore.add(textComponent.content());
         }
+
+        //  handle the DISPLAY-NAME param
+
+        this.displayName =
+                LightEconomy.instance.colorTranslation.convertToString(section.getString("args.display-name"));
 
 
         String itemData = section.getString("args.item");

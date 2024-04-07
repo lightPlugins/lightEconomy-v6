@@ -17,20 +17,15 @@ public class SettingParams {
     }
 
 
-
     public String getModuleLanguage() {
         return lightEco.getSettings().getConfig().getString("module-language");
     }
 
 
-
-
     public DefaultCurrency defaultCurrency() {
         return new DefaultCurrency();
     }
-    public SettingWrapper mainSettings() {
-        return new SettingWrapper();
-    }
+    public SettingWrapper mainSettings() { return new SettingWrapper(); }
 
 
     public class SettingWrapper {

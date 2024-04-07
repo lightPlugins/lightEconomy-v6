@@ -22,6 +22,10 @@ public class ColorTranslation {
 
     private final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
 
+    public String convertToString(String string) {
+        return MiniMessage.miniMessage().serialize(universalColor(string));
+    }
+
     /**
      * A method to convert color codes in the input message string to the corresponding ChatColor in Minecraft.
      *

@@ -3,6 +3,7 @@ rows: 6
 contents:
   - id: gui_item
     args:
+      data: 'baltop_1'
       item: 'player_head 1 model-data:123 glow hide_enchants hide_flags'
       head-data: '#player-data#'
       display-name: '<gold>#1 <gray>#playername#'
@@ -10,8 +11,10 @@ contents:
         - '<gray>This is a lore #amount#'
       item-pos-x: 4
       item-pos-y: 1
+      actions: []
   - id: gui_item
     args:
+      data: 'baltop_2'
       item: 'player_head 1 model-data:123 unbreaking:1 hide_enchants hide_flags'
       head-data: '#player#'
       display-name: '<yellow>#2 <gray>#playername#'
@@ -19,8 +22,10 @@ contents:
         - '<gray>This is a lore #amount#'
       item-pos-x: 3
       item-pos-y: 2
+      actions: []
   - id: gui_item
     args:
+      data: 'baltop_3'
       item: 'player_head 1 model-data:123 unbreaking:1 hide_enchants hide_flags'
       head-data: '#player#'
       display-name: '<white>#3 <gray>#playername#'
@@ -28,3 +33,4 @@ contents:
         - '<gray>This is a lore #amount#'
       item-pos-x: 3
       item-pos-y: 2
+      actions: []

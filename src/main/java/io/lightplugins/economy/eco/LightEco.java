@@ -15,6 +15,7 @@ import io.lightplugins.economy.util.SubCommand;
 import io.lightplugins.economy.util.interfaces.LightModule;
 import io.lightplugins.economy.util.manager.CommandManager;
 import io.lightplugins.economy.util.manager.FileManager;
+import io.lightplugins.economy.util.manager.MultiFileManager;
 import io.lightplugins.vaulty.api.economy.VaultyEconomy;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -22,7 +23,10 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LightEco implements LightModule {
 
@@ -37,6 +41,7 @@ public class LightEco implements LightModule {
     public final String adminPerm = "lighteconomy." + moduleName + ".admin";
     public final static String tablePrefix = "lighteco_";
     private final ArrayList<SubCommand> subCommands = new ArrayList<>();
+    public static List<File> inventoriesFiles = new ArrayList<>();
 
     private SettingParams settingParams;
     private static MessageParams messageParams;
@@ -49,6 +54,7 @@ public class LightEco implements LightModule {
 
     private FileManager settings;
     private FileManager language;
+    private MultiFileManager inventories;
 
     @Override
     public void enable() {
@@ -132,8 +138,26 @@ public class LightEco implements LightModule {
     }
 
     private void initFiles() {
+
+        //  generate and load settings.yml from core module ECO folder
+
         this.settings = new FileManager(
                 LightEconomy.instance, moduleName + "/settings.yml", true);
+
+        //  generate and load inventories from inventories folder
+
+        try {
+            this.inventories = new MultiFileManager(moduleName + "/inventories/");
+            inventoriesFiles = inventories.getFiles();
+            LightEconomy.getDebugPrinting().print("Found §e" + inventoriesFiles.size() + "§f inventory file(s)");
+            if(inventoriesFiles.size() > 0) {
+                inventoriesFiles.forEach(singleFile -> {
+                    LightEconomy.getDebugPrinting().print("- §e" + singleFile.getName());
+                });
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException("Failed to initialize inventory configs!", ex);
+        }
     }
 
     private void initSubCommands() {
@@ -186,5 +210,13 @@ public class LightEco implements LightModule {
         this.queryManager = new QueryManager(LightEconomy.instance.getConnection());
         queryManager.createEcoTable();
         return true;
+    }
+
+    public MultiFileManager getInventories() {
+        return inventories;
+    }
+
+    public List<File> getInventoryFiles() {
+        return inventories.getYamlFiles();
     }
 }

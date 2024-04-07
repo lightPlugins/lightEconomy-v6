@@ -35,7 +35,7 @@ public class MultiFileManager {
         });
     }
 
-    public List<File> getYamlFiles() {
+    public List<File> getFiles() {
         return yamlFiles;
     }
 
