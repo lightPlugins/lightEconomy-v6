@@ -31,6 +31,6 @@ contents:
       display-name: '<white>#3 <gray>#playername#'
       lore:
         - '<gray>This is a lore #amount#'
-      item-pos-x: 3
+      item-pos-x: 4
       item-pos-y: 2
       actions: []

@@ -62,7 +62,7 @@ public class ColorTranslation {
      * @param  message   the message to be deserialized
      * @return          the deserialized Component object
      */
-    private Component miniMessage(String message) {
+    public Component miniMessage(String message) {
         MiniMessage mm = MiniMessage.miniMessage();
         return mm.deserialize(message);
     }

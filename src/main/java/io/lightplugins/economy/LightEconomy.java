@@ -235,7 +235,7 @@ public class LightEconomy extends JavaPlugin {
     @NotNull
     public List<File> getMultiFiles(String path) throws IOException {
         // Add files from the MultiFileManager to the existing files list
-        return new ArrayList<>(readMultiFiles(path).getYamlFiles());
+        return new ArrayList<>(readMultiFiles(path).getFiles());
     }
 
     @NotNull

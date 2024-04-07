@@ -4,6 +4,7 @@ import io.lightplugins.economy.LightEconomy;
 import io.lightplugins.economy.eco.commands.eco.EcoGiveCommand;
 import io.lightplugins.economy.eco.commands.eco.EcoRemoveCommand;
 import io.lightplugins.economy.eco.commands.eco.EcoSetCommand;
+import io.lightplugins.economy.eco.commands.eco.EcoTopCommand;
 import io.lightplugins.economy.eco.commands.main.ReloadCommand;
 import io.lightplugins.economy.eco.config.MessageParams;
 import io.lightplugins.economy.eco.config.SettingParams;
@@ -54,7 +55,8 @@ public class LightEco implements LightModule {
 
     private FileManager settings;
     private FileManager language;
-    private MultiFileManager inventories;
+    private FileManager baltop;
+    private MultiFileManager multiFileManager;
 
     @Override
     public void enable() {
@@ -132,6 +134,7 @@ public class LightEco implements LightModule {
     public FileManager getSettings() { return settings; }
 
     public FileManager getLanguage() { return language; }
+    public FileManager getBaltop() { return baltop; }
 
     private void selectLanguage() {
         this.language = LightEconomy.instance.selectLanguage(settingParams.getModuleLanguage(), moduleName);
@@ -139,16 +142,22 @@ public class LightEco implements LightModule {
 
     private void initFiles() {
 
-        //  generate and load settings.yml from core module ECO folder
+        //  generate and load settings.yml from core module ECO
 
         this.settings = new FileManager(
                 LightEconomy.instance, moduleName + "/settings.yml", true);
 
+        //  generate and load /inventories/baltop.yml from core module ECO
+
+        this.baltop = new FileManager(
+                LightEconomy.instance, moduleName + "/inventories/baltop.yml", true);
+
+
         //  generate and load inventories from inventories folder
 
         try {
-            this.inventories = new MultiFileManager(moduleName + "/inventories/");
-            inventoriesFiles = inventories.getFiles();
+            this.multiFileManager = new MultiFileManager("plugins/lightEconomy/" + moduleName + "/inventories/");
+            inventoriesFiles = multiFileManager.getFiles();
             LightEconomy.getDebugPrinting().print("Found §e" + inventoriesFiles.size() + "§f inventory file(s)");
             if(inventoriesFiles.size() > 0) {
                 inventoriesFiles.forEach(singleFile -> {
@@ -166,6 +175,7 @@ public class LightEco implements LightModule {
         subCommands.add(new EcoRemoveCommand());
         subCommands.add(new EcoSetCommand());
         subCommands.add(new ReloadCommand());
+        subCommands.add(new EcoTopCommand());
         new CommandManager(ecoCommand, subCommands);
 
     }
@@ -212,11 +222,11 @@ public class LightEco implements LightModule {
         return true;
     }
 
-    public MultiFileManager getInventories() {
-        return inventories;
+    public MultiFileManager getMultiFileManager() {
+        return multiFileManager;
     }
 
     public List<File> getInventoryFiles() {
-        return inventories.getYamlFiles();
+        return multiFileManager.getFiles();
     }
 }

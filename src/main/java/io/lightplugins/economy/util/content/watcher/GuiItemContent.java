@@ -4,8 +4,10 @@ import io.lightplugins.economy.LightEconomy;
 import io.lightplugins.economy.util.NumberFormatter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -13,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GuiItemContent {
 
@@ -70,47 +73,55 @@ public class GuiItemContent {
     }
 
 
-    public GuiItemContent(ConfigurationSection section) {
+    public GuiItemContent(Map<String, Object> section) {
 
-        this.posX = section.getInt("args.item-pos-x");
-        this.posY = section.getInt("args.item-pos-y");
+        String id = (String) section.get("id");
+        Map<String, Object> args = (Map<String, Object>) section.get("args");
+        String data = (String) args.get("data");
+        String item = (String) args.get("item");
+        String displayName = (String) args.get("display-name");
+        int posX = (int) args.get("item-pos-x");
+        int posY = (int) args.get("item-pos-y");
+        List<String> lore = (List<String>) args.get("lore");
+
+        this.posX = posX;
+        this.posY = posY;
 
         //  handle the LORE param
 
-        for(String lore : section.getStringList("args.lore")) {
-            TextComponent textComponent = Component.text(lore);
-            this.lore.add(textComponent.content());
+        for(String loreLine : lore) {
+            Component text = LightEconomy.instance.colorTranslation.universalColor(loreLine);
+            String translated = LegacyComponentSerializer.legacySection().serialize(text);
+            this.lore.add(translated);
         }
 
         //  handle the DISPLAY-NAME param
+        Component text = LightEconomy.instance.colorTranslation.miniMessage(displayName);
+        this.displayName = LegacyComponentSerializer.legacySection().serialize(text);
 
-        this.displayName =
-                LightEconomy.instance.colorTranslation.convertToString(section.getString("args.display-name"));
 
-
-        String itemData = section.getString("args.item");
-        String[] item = itemData.split(" ");
+        String[] itemArray = item.split(" ");
 
         //  handle the item data input for material, amount, model-data, glow hide_flags and hide_enchants
 
         //  handle the MATERIAL param
 
         try {
-            this.material = Material.valueOf(item[0]);
+            this.material = Material.valueOf(itemArray[0].toUpperCase());
         } catch (IllegalStateException ignored) {
             this.material = Material.STONE;
         }
 
         //  handle the AMOUNT param
 
-        if(NumberFormatter.isNumber(item[1])) {
-            this.amount = Integer.parseInt(item[1]);
+        if(NumberFormatter.isNumber(itemArray[1])) {
+            this.amount = Integer.parseInt(itemArray[1]);
         } else {
             this.amount = 1;
         }
 
 
-        for(String split : item) {
+        for(String split : itemArray) {
 
             //  handle the MODEL-DATA
 

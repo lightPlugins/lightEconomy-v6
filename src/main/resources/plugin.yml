@@ -16,6 +16,9 @@ commands:
   eco:
     description: The root command for module [eco]
     aliases: [money, balance, bal, lighteco]
+  ecotop:
+    description: The eco top command for module [eco]
+    aliases: [moneytop, balancetop, mtop, btop]
   bank:
     description: The root command for module [bank]
     aliases: [b, bk, lightbank]
