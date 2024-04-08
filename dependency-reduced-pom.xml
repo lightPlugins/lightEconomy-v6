@@ -23,8 +23,8 @@
                   <shadedPattern>io.lightplugins.economy.util.database.hikari</shadedPattern>
                 </relocation>
                 <relocation>
-                  <pattern>com.github.stefvanschie.inventoryframework</pattern>
-                  <shadedPattern>ui.lightplugins.economny.util.inventory</shadedPattern>
+                  <pattern>me.devnatan.inventoryframework</pattern>
+                  <shadedPattern>io.lightplugins.economy.util.inventory</shadedPattern>
                 </relocation>
               </relocations>
               <outputFile>./lighteco-dev-server/plugins/${project.artifactId}-${project.version}-SNAPSHOT.jar</outputFile>

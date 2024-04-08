@@ -11,6 +11,7 @@ import io.lightplugins.economy.eco.config.SettingParams;
 import io.lightplugins.economy.eco.implementer.events.CreatePlayerOnJoin;
 import io.lightplugins.economy.eco.implementer.vault.VaultImplementer;
 import io.lightplugins.economy.eco.implementer.vaulty.VaultyImplementer;
+import io.lightplugins.economy.eco.inventories.BaltopInventory;
 import io.lightplugins.economy.eco.manager.QueryManager;
 import io.lightplugins.economy.util.SubCommand;
 import io.lightplugins.economy.util.interfaces.LightModule;
@@ -18,6 +19,8 @@ import io.lightplugins.economy.util.manager.CommandManager;
 import io.lightplugins.economy.util.manager.FileManager;
 import io.lightplugins.economy.util.manager.MultiFileManager;
 import io.lightplugins.vaulty.api.economy.VaultyEconomy;
+import me.devnatan.inventoryframework.ViewFrame;
+import me.devnatan.inventoryframework.pipeline.PipelinePhase;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
@@ -49,6 +52,8 @@ public class LightEco implements LightModule {
 
     public VaultyEconomy vaultyProvider;
     public VaultyImplementer vaultyImplementer;
+
+    public ViewFrame viewFrame;
 
     private net.milkbowl.vault.economy.Economy vaultProvider;
     private VaultImplementer vaultImplementer;
@@ -88,6 +93,7 @@ public class LightEco implements LightModule {
 
 
         registerEvents();
+        registerInventories();
         RegisteredServiceProvider<VaultyEconomy> vaultyRSP =
                 Bukkit.getServer().getServicesManager().getRegistration(VaultyEconomy.class);
         RegisteredServiceProvider<Economy> vaultRSP =
@@ -228,5 +234,12 @@ public class LightEco implements LightModule {
 
     public List<File> getInventoryFiles() {
         return multiFileManager.getFiles();
+    }
+
+    public void registerInventories() {
+
+        this.viewFrame = ViewFrame.create(LightEconomy.instance)
+                .with(new BaltopInventory())
+                .register();
     }
 }

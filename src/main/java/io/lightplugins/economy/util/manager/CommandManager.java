@@ -1,19 +1,12 @@
 package io.lightplugins.economy.util.manager;
 
-import com.github.stefvanschie.inventoryframework.gui.GuiItem;
-import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
-import com.github.stefvanschie.inventoryframework.pane.OutlinePane;
-import com.github.stefvanschie.inventoryframework.pane.Pane;
 import io.lightplugins.economy.LightEconomy;
 import io.lightplugins.economy.eco.LightEco;
 import io.lightplugins.economy.util.CompositeTabCompleter;
 import io.lightplugins.economy.util.NumberFormatter;
 import io.lightplugins.economy.util.SubCommand;
-import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;

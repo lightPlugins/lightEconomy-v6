@@ -12,10 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeMap;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 public class QueryManager {
@@ -81,10 +78,10 @@ public class QueryManager {
         return future;
     }
 
-    public CompletableFuture<TreeMap<UUID, BigDecimal>> getTopList() {
-        CompletableFuture<TreeMap<UUID, BigDecimal>> future = new CompletableFuture<>();
+    public CompletableFuture<Map<UUID, BigDecimal>> getTopList() {
+        CompletableFuture<Map<UUID, BigDecimal>> future = new CompletableFuture<>();
 
-        List<UUID> excluded = Arrays.asList(UUID.fromString("your_uuid1"), UUID.fromString("your_uuid2"), UUID.fromString("your_uuid3"));
+        List<UUID> excluded = Arrays.asList(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID());
 
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT uuid, balance FROM ").append(tableName); // tableName einfügen
@@ -100,7 +97,7 @@ public class QueryManager {
             queryBuilder.append(")");
         }
 
-        queryBuilder.append(" ORDER BY balance DESC LIMIT 10;");
+        queryBuilder.append(" ORDER BY balance DESC LIMIT 9;");
 
         String sql = queryBuilder.toString(); // Abfrage als String speichern
 
@@ -108,7 +105,7 @@ public class QueryManager {
              PreparedStatement statement = c.prepareStatement(sql); // PreparedStatement mit der Abfrage erstellen
              ResultSet set = statement.executeQuery()) {
 
-            TreeMap<UUID, BigDecimal> resultMap = new TreeMap<>();
+            Map<UUID, BigDecimal> resultMap = new HashMap<>();
             while (set.next()) {
                 double balance = set.getDouble("balance");
                 UUID uuid = UUID.fromString(set.getString("uuid"));

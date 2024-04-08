@@ -1,7 +1,7 @@
 package io.lightplugins.economy.eco.commands.eco;
 
 import io.lightplugins.economy.eco.LightEco;
-import io.lightplugins.economy.eco.inventories.BaltopGUI;
+import io.lightplugins.economy.eco.inventories.BaltopInventory;
 import io.lightplugins.economy.util.SubCommand;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabCompleter;
@@ -61,8 +61,9 @@ public class EcoTopCommand extends SubCommand {
             String cfgName = LightEco.instance.getMultiFileManager().getFileNameWithoutExtension(file);
 
             if(cfgName.equalsIgnoreCase("baltop")) {
-                BaltopGUI baltopGUI = new BaltopGUI(file);
-                baltopGUI.openBaltopGUI(player);
+
+                LightEco.instance.viewFrame.open(BaltopInventory.class, player);
+
                 player.sendMessage("opened baltop gui");
                 return false;
             }

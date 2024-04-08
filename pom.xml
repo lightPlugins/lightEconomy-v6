@@ -96,9 +96,10 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
-            <artifactId>IF</artifactId>
-            <version>0.10.13</version>
+            <groupId>me.devnatan</groupId>
+            <artifactId>inventory-framework-platform-bukkit</artifactId>
+            <version>3.1.0-rc</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -173,8 +174,8 @@
                                     <shadedPattern>io.lightplugins.economy.util.database.hikari</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>com.github.stefvanschie.inventoryframework</pattern>
-                                    <shadedPattern>ui.lightplugins.economny.util.inventory</shadedPattern>
+                                    <pattern>me.devnatan.inventoryframework</pattern>
+                                    <shadedPattern>io.lightplugins.economy.util.inventory</shadedPattern>
                                 </relocation>
                             </relocations>
                             <outputFile>./lighteco-dev-server/plugins/${project.artifactId}-${project.version}-SNAPSHOT.jar</outputFile>
