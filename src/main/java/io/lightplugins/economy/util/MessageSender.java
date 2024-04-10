@@ -11,7 +11,8 @@ public class MessageSender {
     public void sendPlayerMessage(String message, Player player) {
         Bukkit.getScheduler().runTask(LightEconomy.instance, () -> {
             Audience audience = (Audience) player;
-            Component component = LightEconomy.instance.colorTranslation.universalColor(LightEco.getMessageParams().prefix() + message);
+            Component component = LightEconomy.instance.colorTranslation.universalColor(
+                    LightEco.getMessageParams().prefix() + message, player);
             audience.sendMessage(component);
         });
     }

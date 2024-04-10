@@ -1,36 +1,26 @@
 gui-title: 'Top Balances'
 rows: 6
+pattern:
+  - '000000000'
+  - '0000a0000'
+  - '000bcd000'
+  - '00efghi00'
+  - '000000000'
+  - '000000000'
 contents:
-  - id: gui_item
+  'a':
+    id: gui_item
     args:
-      data: 'baltop_1'
-      item: 'player_head 1 model-data:123 glow hide_enchants hide_flags'
-      head-data: '#player-data#'
-      display-name: '<gold>#1 <gray>#playername#'
+      placeholders:
+        value: '%lighteocnomy_baltop_1_value%'
+        name: '%lighteocnomy_baltop_1_name%'
+      item: 'player_head 1 model-data:123 unbreaking:1 hide_enchants hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#0 <gray>#name#'
       lore:
-        - '<gray>This is a lore #amount#'
-      item-pos-x: 4
-      item-pos-y: 1
-      actions: []
-  - id: gui_item
-    args:
-      data: 'baltop_2'
-      item: 'player_head 1 model-data:123 unbreaking:1 hide_enchants hide_flags'
-      head-data: '#player#'
-      display-name: '<yellow>#2 <gray>#playername#'
-      lore:
-        - '<gray>This is a lore #amount#'
-      item-pos-x: 3
-      item-pos-y: 2
-      actions: []
-  - id: gui_item
-    args:
-      data: 'baltop_3'
-      item: 'player_head 1 model-data:123 unbreaking:1 hide_enchants hide_flags'
-      head-data: '#player#'
-      display-name: '<white>#3 <gray>#playername#'
-      lore:
-        - '<gray>This is a lore #amount#'
-      item-pos-x: 4
-      item-pos-y: 2
-      actions: []
+        - '<gray>This is a lore #value#'
+      actions:
+        '0':
+          id: open_gui
+          args:
+            gui: 'baltop'

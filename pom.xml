@@ -96,10 +96,9 @@
         </dependency>
 
         <dependency>
-            <groupId>me.devnatan</groupId>
-            <artifactId>inventory-framework-platform-bukkit</artifactId>
-            <version>3.1.0-rc</version>
-            <scope>compile</scope>
+            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <artifactId>IF</artifactId>
+            <version>0.10.13</version>
         </dependency>
 
         <dependency>
@@ -174,7 +173,7 @@
                                     <shadedPattern>io.lightplugins.economy.util.database.hikari</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>me.devnatan.inventoryframework</pattern>
+                                    <pattern>com.github.stefvanschie.inventoryframework</pattern>
                                     <shadedPattern>io.lightplugins.economy.util.inventory</shadedPattern>
                                 </relocation>
                             </relocations>

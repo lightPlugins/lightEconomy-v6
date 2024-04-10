@@ -1,9 +1,11 @@
 package io.lightplugins.economy.util;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +34,7 @@ public class ColorTranslation {
      * @param msg the input message string
      * @return the message string with color codes converted to ChatColor
      */
-    public Component universalColor(String msg) {
+    public Component universalColor(String msg, Player player) {
         // Check if the server version is within the supported range
         if (Bukkit.getVersion().matches("1\\.1[6-9]|1\\.20")) {
             // Translate alternative hex input ("&#ffdc73 to "#ffdc73")
@@ -53,7 +55,7 @@ public class ColorTranslation {
         String legacyColor = ChatColor.translateAlternateColorCodes('&', msg);
 
         // Use MiniMessage to deserialize the legacy color codes
-        return miniMessage(legacyColor);
+        return miniMessage(PlaceholderAPI.setPlaceholders(player, legacyColor));
     }
 
     /**
