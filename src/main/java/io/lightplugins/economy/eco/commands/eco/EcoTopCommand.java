@@ -3,12 +3,16 @@ package io.lightplugins.economy.eco.commands.eco;
 import io.lightplugins.economy.eco.LightEco;
 import io.lightplugins.economy.eco.inventories.BaltopInventory;
 import io.lightplugins.economy.util.SubCommand;
+import io.lightplugins.economy.util.handler.ClickItemHandler;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class EcoTopCommand extends SubCommand {
@@ -62,7 +66,8 @@ public class EcoTopCommand extends SubCommand {
 
             if(cfgName.equalsIgnoreCase("baltop")) {
 
-                LightEco.instance.viewFrame.open(BaltopInventory.class, player);
+                BaltopInventory baltopInventory = new BaltopInventory(player, file);
+                baltopInventory.openInventory();
 
                 player.sendMessage("opened baltop gui");
                 return false;

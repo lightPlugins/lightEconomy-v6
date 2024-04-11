@@ -1,8 +1,11 @@
 package io.lightplugins.economy.util;
 
+import io.lightplugins.economy.LightEconomy;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,8 +27,8 @@ public class ColorTranslation {
 
     private final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
 
-    public String convertToString(String string) {
-        return MiniMessage.miniMessage().serialize(universalColor(string));
+    public String convertToString(String string, Player player) {
+        return MiniMessage.miniMessage().serialize(universalColor(string, player));
     }
 
     /**
@@ -67,5 +70,10 @@ public class ColorTranslation {
     public Component miniMessage(String message) {
         MiniMessage mm = MiniMessage.miniMessage();
         return mm.deserialize(message);
+    }
+
+    public String loreLineTranslation(String line, Player player) {
+        Component parsed = MiniMessage.miniMessage().deserialize(line);
+        return PlaceholderAPI.setPlaceholders(player, ChatColor.translateAlternateColorCodes('&', LegacyComponentSerializer.legacyAmpersand().serialize(parsed)));
     }
 }

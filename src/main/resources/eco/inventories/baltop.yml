@@ -6,21 +6,141 @@ pattern:
   - '000bcd000'
   - '00efghi00'
   - '000000000'
-  - '000000000'
+  - '000010000'
 contents:
   'a':
     id: gui_item
     args:
       placeholders:
-        value: '%lighteocnomy_baltop_1_value%'
-        name: '%lighteocnomy_baltop_1_name%'
-      item: 'player_head 1 model-data:123 unbreaking:1 hide_enchants hide_attributes'
+        value: '%lighteconomy_baltop_1_value%'
+        name: '%lighteconomy_baltop_1_name%'
+      item: 'player_head 1 hide_attributes'
       head-data: '#name#'
-      display-name: '<red>#0 <gray>#name#'
+      display-name: '<red>#1 <gray>#name#'
       lore:
         - '<gray>This is a lore #value#'
-      actions:
-        '0':
-          id: open_gui
-          args:
-            gui: 'baltop'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'b':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_2_value%'
+        name: '%lighteconomy_baltop_2_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'c':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_3_value%'
+        name: '%lighteconomy_baltop_3_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'd':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_4_value%'
+        name: '%lighteconomy_baltop_4_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'e':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_5_value%'
+        name: '%lighteconomy_baltop_5_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'f':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_6_value%'
+        name: '%lighteconomy_baltop_6_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'g':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_7_value%'
+        name: '%lighteconomy_baltop_7_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'h':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_8_value%'
+        name: '%lighteconomy_baltop_8_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  'i':
+    id: gui_item
+    args:
+      placeholders:
+        value: '%lighteconomy_baltop_9_value%'
+        name: '%lighteconomy_baltop_9_name%'
+      item: 'player_head 1 hide_attributes'
+      head-data: '#name#'
+      display-name: '<red>#1 <gray>#name#'
+      lore:
+        - '<gray>This is a lore #value# + #name#'
+      click-actions:
+        - 'message;<red>Hello World! #name# #value#'
+  '0':
+    id: gui_item
+    args:
+      placeholders: { }
+      item: 'black_stained_glass_pane 1 hide_attributes'
+      head-data: []
+      display-name: ''
+      lore: []
+      click-actions: []
+  '1':
+    id: gui_item
+    args:
+      placeholders: { }
+      item: 'redstone 1 hide_attributes'
+      head-data: []
+      display-name: '<red>back'
+      lore: []
+      click-actions:
+        - 'close_inventory'

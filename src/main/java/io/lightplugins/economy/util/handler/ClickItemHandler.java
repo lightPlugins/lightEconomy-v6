@@ -1,10 +1,8 @@
-package io.lightplugins.economy.util.contents;
+package io.lightplugins.economy.util.handler;
 
 import io.lightplugins.economy.LightEconomy;
 import io.lightplugins.economy.util.NumberFormatter;
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -14,31 +12,31 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
-public class GuiContents {
+public class ClickItemHandler {
 
     private final ConfigurationSection GUI_ITEM_ARGS;
-    private final ConfigurationSection ACTION_SECTION;
+    private final List<String> actions;
     private final ConfigurationSection PLACEHOLDERS;
     private final Player player;
     private String item;
     private String displayName;
     private List<String> lore = new ArrayList<>();
-    private Map<String, String> placeholders = new HashMap<>();
-    private int itemPosX;
-    private int itemPosY;
+    private final Map<String, String> placeholders = new HashMap<>();
     private int modelData;
     private boolean playerHead = false;
+    private String headData;
 
 
-    public GuiContents(ConfigurationSection section, Player player) {
+    public ClickItemHandler(ConfigurationSection section, Player player) {
         this.GUI_ITEM_ARGS = section.getConfigurationSection("args");
-        this.ACTION_SECTION = section.getConfigurationSection("args.actions");
+        this.actions = section.getStringList("args.click-actions");
         this.PLACEHOLDERS = section.getConfigurationSection("args.placeholders");
         this.player = player;
 
         applyPlaceholders();
         guiItemContent();
         translatePlaceholders();
+        translateLore();
 
     }
 
@@ -54,30 +52,29 @@ public class GuiContents {
     }
 
     private void translatePlaceholders() {
-
         for(String key : placeholders.keySet()) {
-            displayName = LightEconomy.instance.colorTranslation.convertToString(
-                    displayName.replace("#" + key + "#", placeholders.get(key)));
-
-            List<String> translatedLore = new ArrayList<>();
-            for(String line : lore) {
-                Component text = LightEconomy.instance.colorTranslation.universalColor(line, player);
-                String translated = LegacyComponentSerializer.legacySection().serialize(text);
-                translatedLore.add(translated.replace("#" + key + "#", placeholders.get(key)));
-            }
-
-            this.lore = translatedLore;
+            this.displayName = displayName.replace("#" + key + "#", placeholders.get(key));
+            headData = headData.replace("#" + key + "#", placeholders.get(key));
         }
+    }
 
+    private void translateLore() {
+        List<String> translatedLore = new ArrayList<>();
+        for(String line : lore) {
+            for(String key : placeholders.keySet()) {
+                line = line.replace("#" + key + "#", placeholders.get(key));
+            }
+            translatedLore.add(LightEconomy.instance.colorTranslation.loreLineTranslation(line, player));
+        }
+        this.lore = translatedLore;
     }
 
     private void guiItemContent() {
 
-        item = GUI_ITEM_ARGS.getString("item");
-        displayName = GUI_ITEM_ARGS.getString("display-name");
-        lore = GUI_ITEM_ARGS.getStringList("lore");
-        itemPosX = GUI_ITEM_ARGS.getInt("item-pos-x");
-        itemPosY = GUI_ITEM_ARGS.getInt("item-pos-y");
+        this.item = GUI_ITEM_ARGS.getString("item");
+        this.displayName = GUI_ITEM_ARGS.getString("display-name");
+        this.lore = GUI_ITEM_ARGS.getStringList("lore");
+        this.headData = GUI_ITEM_ARGS.getString("head-data");
 
     }
 
@@ -98,7 +95,6 @@ public class GuiContents {
             if(material.equals(Material.PLAYER_HEAD)) {
                 playerHead = true;
             }
-
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -107,7 +103,7 @@ public class GuiContents {
             return null;
         }
 
-        itemMeta.setDisplayName(LightEconomy.instance.colorTranslation.convertToString(displayName));
+        itemMeta.setDisplayName(LightEconomy.instance.colorTranslation.loreLineTranslation(displayName, player));
 
         for(String split : splitItem) {
 
@@ -115,6 +111,7 @@ public class GuiContents {
                 String[] splitModelData = split.split(":");
                 if(NumberFormatter.isNumber(splitModelData[1])) {
                     itemMeta.setCustomModelData(Integer.parseInt(splitModelData[1]));
+                    this.modelData = Integer.parseInt(splitModelData[1]);
                 }
             }
 
@@ -125,20 +122,15 @@ public class GuiContents {
             if(split.equalsIgnoreCase("hide_attributes")) {
                 itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             }
-
         }
 
+        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
 
-    public boolean isPlayerHead() {
-        return playerHead;
-    }
-    public int getItemPosX() {
-        return itemPosX;
-    }
-    public int getItemPosY() {
-        return itemPosY;
-    }
+    public boolean isPlayerHead() { return playerHead; }
+    public String getHeadData() { return headData; }
+    public int getModelData() { return modelData; }
+    public List<String> getActions() { return actions; }
 }
