@@ -81,7 +81,7 @@ public class QueryManager {
     public CompletableFuture<Map<UUID, BigDecimal>> getTopList() {
         CompletableFuture<Map<UUID, BigDecimal>> future = new CompletableFuture<>();
 
-        List<UUID> excluded = Arrays.asList(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID());
+        List<String> excluded = LightEco.instance.getSettingParams().defaultCurrency().getExcludeTop();
 
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT uuid, balance FROM ").append(tableName); // tableName einfügen

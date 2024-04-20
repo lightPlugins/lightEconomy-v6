@@ -12,8 +12,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_1_value%'
-        name: '%lighteconomy_baltop_1_name%'
+        value: '%lighteconomy_eco_top_1_value%'
+        name: '%lighteconomy_eco_top_1_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -25,8 +25,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_2_value%'
-        name: '%lighteconomy_baltop_2_name%'
+        value: '%lighteconomy_eco_top_2_value%'
+        name: '%lighteconomy_eco_top_2_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -38,8 +38,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_3_value%'
-        name: '%lighteconomy_baltop_3_name%'
+        value: '%lighteconomy_eco_top_3_value%'
+        name: '%lighteconomy_eco_top_3_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -51,8 +51,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_4_value%'
-        name: '%lighteconomy_baltop_4_name%'
+        value: '%lighteconomy_eco_top_4_value%'
+        name: '%lighteconomy_eco_top_4_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -64,8 +64,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_5_value%'
-        name: '%lighteconomy_baltop_5_name%'
+        value: '%lighteconomy_eco_top_5_value%'
+        name: '%lighteconomy_eco_top_5_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -77,8 +77,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_6_value%'
-        name: '%lighteconomy_baltop_6_name%'
+        value: '%lighteconomy_eco_top_6_value%'
+        name: '%lighteconomy_eco_top_6_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -90,8 +90,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_7_value%'
-        name: '%lighteconomy_baltop_7_name%'
+        value: '%lighteconomy_eco_top_7_value%'
+        name: '%lighteconomy_eco_top_7_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -103,8 +103,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_8_value%'
-        name: '%lighteconomy_baltop_8_name%'
+        value: '%lighteconomy_eco_top_8_value%'
+        name: '%lighteconomy_eco_top_8_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'
@@ -116,8 +116,8 @@ contents:
     id: gui_item
     args:
       placeholders:
-        value: '%lighteconomy_baltop_9_value%'
-        name: '%lighteconomy_baltop_9_name%'
+        value: '%lighteconomy_eco_top_9_value%'
+        name: '%lighteconomy_eco_top_9_name%'
       item: 'player_head 1 hide_attributes'
       head-data: '#name#'
       display-name: '<red>#1 <gray>#name#'

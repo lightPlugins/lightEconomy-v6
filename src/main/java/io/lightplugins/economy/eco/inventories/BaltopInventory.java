@@ -7,19 +7,15 @@ import com.github.stefvanschie.inventoryframework.pane.util.Pattern;
 import io.lightplugins.economy.LightEconomy;
 import io.lightplugins.economy.util.handler.ClickItemHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
-import java.net.URI;
 import java.util.Objects;
 
 public class BaltopInventory {
@@ -79,10 +75,12 @@ public class BaltopInventory {
 
         gui.addPane(pane);
         gui.show(player);
-        startUpdater();
+        //startUpdater();
 
 
     }
+
+    /*
 
     private void startUpdater() {
 
@@ -99,4 +97,6 @@ public class BaltopInventory {
         }.runTaskTimer(LightEconomy.instance, 20, 20);
 
     }
+
+     */
 }

@@ -3,9 +3,11 @@ package io.lightplugins.economy;
 import com.zaxxer.hikari.HikariDataSource;
 import io.lightplugins.economy.bank.LightBank;
 import io.lightplugins.economy.eco.LightEco;
+import io.lightplugins.economy.eco.placeholders.EcoTopPlaceholder;
 import io.lightplugins.economy.util.ColorTranslation;
 import io.lightplugins.economy.util.DebugPrinting;
 import io.lightplugins.economy.util.MessageSender;
+import io.lightplugins.economy.util.SubPlaceholder;
 import io.lightplugins.economy.util.database.SQLDatabase;
 import io.lightplugins.economy.util.database.impl.MySQLDatabase;
 import io.lightplugins.economy.util.database.impl.SQLiteDatabase;
@@ -14,6 +16,7 @@ import io.lightplugins.economy.util.database.model.DatabaseCredentials;
 import io.lightplugins.economy.util.interfaces.LightModule;
 import io.lightplugins.economy.util.manager.FileManager;
 import io.lightplugins.economy.util.manager.MultiFileManager;
+import io.lightplugins.economy.util.manager.PlaceholderManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -36,6 +39,7 @@ public class LightEconomy extends JavaPlugin {
     private LightBank lightBank;
 
     private Map<String, LightModule> modules = new HashMap<>();
+    private final ArrayList<SubPlaceholder> subPlaceholders = new ArrayList<>();
 
     private static MessageSender messageSender;
     public static FileManager database;
@@ -87,6 +91,8 @@ public class LightEconomy extends JavaPlugin {
         messageSender = new MessageSender();
         initModules();
         loadModules();
+        initSubPlaceHolders();
+        registerPlaceHolders();
 
     }
 
@@ -258,5 +264,14 @@ public class LightEconomy extends JavaPlugin {
 
     public SQLDatabase getConnection() {
         return this.pluginDatabase;
+    }
+
+    private void initSubPlaceHolders() {
+        this.subPlaceholders.add(new EcoTopPlaceholder());
+    }
+
+    private void registerPlaceHolders() {
+        PlaceholderManager placeholderManager = new PlaceholderManager(this.subPlaceholders);
+        placeholderManager.register();
     }
 }
