@@ -8,7 +8,6 @@ import java.util.UUID;
 public class AccountHolder {
 
     private BigDecimal balance;
-    private double formattedBalance;
     private UUID uuid;
 
     public BigDecimal getBalance() {

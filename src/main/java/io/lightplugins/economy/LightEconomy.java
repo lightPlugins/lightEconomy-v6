@@ -3,6 +3,7 @@ package io.lightplugins.economy;
 import com.zaxxer.hikari.HikariDataSource;
 import io.lightplugins.economy.bank.LightBank;
 import io.lightplugins.economy.eco.LightEco;
+import io.lightplugins.economy.eco.api.LightEcoAPI;
 import io.lightplugins.economy.eco.placeholders.EcoTopPlaceholder;
 import io.lightplugins.economy.util.ColorTranslation;
 import io.lightplugins.economy.util.DebugPrinting;
@@ -27,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.*;
 
 public class LightEconomy extends JavaPlugin {
@@ -37,6 +37,8 @@ public class LightEconomy extends JavaPlugin {
 
     private LightEco lightEco;
     private LightBank lightBank;
+
+    private LightEcoAPI lightEcoAPI;
 
     private Map<String, LightModule> modules = new HashMap<>();
     private final ArrayList<SubPlaceholder> subPlaceholders = new ArrayList<>();
@@ -93,6 +95,8 @@ public class LightEconomy extends JavaPlugin {
         loadModules();
         initSubPlaceHolders();
         registerPlaceHolders();
+
+        this.lightEcoAPI = new LightEcoAPI(LightEco.instance);
 
     }
 
@@ -273,5 +277,9 @@ public class LightEconomy extends JavaPlugin {
     private void registerPlaceHolders() {
         PlaceholderManager placeholderManager = new PlaceholderManager(this.subPlaceholders);
         placeholderManager.register();
+    }
+
+    public LightEcoAPI getLightEcoAPI() {
+        return this.lightEcoAPI;
     }
 }
